@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mandy Sweets - Masas Dulces & Saladas</title>
+    <!-- Meta tags para SEO -->
+    <meta name="description" content="Masas Dulces y Saladas con insumos de primera calidad. Pasteles, tortas y más.">
+    <meta name="keywords" content="pastelería, tortas, pasteles, dulces, postres, Mandy Sweets">
+    
+    <!-- Estilos -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="css/styles.css" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div id="app">
+        <!-- Loading Overlay -->
+        <div id="loading" class="loading-overlay">
+            <div class="spinner-border text-success"></div>
+            <p class="mt-2">Cargando...</p>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" role="navigation">
+            <div class="container">
+                <!-- Logo -->
+                <a class="navbar-brand" href="#" aria-label="Mandy Sweets">
+                    <img src="assets/images/mandy.jpeg" alt="Mandy Sweets Logo" class="navbar-logo">
+                </a>
+                
+                <!-- Reloj Digital -->
+                <div id="clock" class="digital-clock d-none d-md-block" role="timer" aria-label="Reloj digital"></div>
+                
+                <!-- Botón hamburguesa para móvil -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <!-- Menú de navegación -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#home">
+                                <i class="fas fa-home me-1"></i> HOME
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#products">
+                                <i class="fas fa-store me-1"></i> PRODUCTOS
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#offers">
+                                <i class="fas fa-tag me-1"></i> OFERTAS
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">
+                                <i class="fas fa-envelope me-1"></i> CONTACTO
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <!-- Carrito y Login -->
+                    <div class="d-flex align-items-center">
+                        <button id="cartBtn" class="btn btn-outline-success me-2 position-relative" 
+                                aria-label="Carrito de compras">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cartCount" class="badge bg-danger position-absolute top-0 start-100 translate-middle">
+                                0
+                            </span>
+                        </button>
+                        <button id="loginBtn" class="btn btn-success" aria-label="Iniciar sesión">
+                            <i class="fas fa-user"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Contenido Principal -->
+        <main>
+            <!-- Hero Section -->
+            <section id="home" class="hero">
+                <div class="container text-center">
+                    <div class="hero-content fade-in">
+                        <h1 class="display-4 mb-4">Bienvenido a Mandy Sweets</h1>
+                        <p class="lead mb-4">Descubre nuestra exquisita selección de masas dulces y saladas, 
+                            elaboradas con los mejores ingredientes para endulzar tus momentos especiales</p>
+                        <div class="cta-buttons">
+                            <a href="#products" class="btn btn-success btn-lg me-3">
+                                <i class="fas fa-store me-2"></i>Ver Productos
+                            </a>
+                            <a href="#contact" class="btn btn-outline-light btn-lg">
+                                <i class="fas fa-phone me-2"></i>Contáctanos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Products Section -->
+            <section id="products" class="py-5">
+                <div class="container">
+                    <h2 class="text-center mb-4">Vitrina de Productos</h2>
+                    
+                    <!-- Filtros y Búsqueda -->
+                    <div class="category-filters mb-4">
+                        <div class="row g-3 align-items-center">
+                            <div class="col-md-8">
+                                <div class="btn-group" role="group" aria-label="Categorías de productos">
+                                    <button type="button" class="btn btn-outline-success active" data-category="todos">
+                                        Todos
+                                    </button>
+                                    <button type="button" class="btn btn-outline-success" data-category="tortas">
+                                        Dulces
+                                    </button>
+                                    <button type="button" class="btn btn-outline-success" data-category="salados">
+                                        Salados
+                                    </button>
+                                    <button type="button" class="btn btn-outline-success" data-category="bebidas">
+                                        Bebidas
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="search-container">
+                                    <input type="text" class="form-control" id="searchInput" 
+                                           placeholder="Buscar productos...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Grid de Productos -->
+                    <div id="productGrid" class="row g-4">
+                        <!-- Los productos se cargarán dinámicamente aquí -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Offers Section -->
+            <section id="offers" class="section py-5 bg-light">
+                <div class="container">
+                    <h2 class="text-center mb-4">Ofertas del Día</h2>
+                    <div id="offersGrid" class="row g-4">
+                        <!-- Aquí se cargarán dinámicamente las ofertas -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="py-5">
+                <div class="container">
+                    <h2 class="text-center mb-4">Contáctanos</h2>
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <form id="contactForm" class="needs-validation" novalidate>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contactEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="contactEmail" required>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Mensaje</label>
+                                    <textarea class="form-control" id="message" rows="3" required></textarea>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <button type="submit" class="btn btn-success w-100">
+                                    <i class="fas fa-paper-plane me-2"></i>Enviar Mensaje
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Cart Modal -->
+        <div class="modal fade" id="cartModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="fas fa-shopping-cart me-2"></i>Carrito de Compras</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="cartItems" class="cart-items-container"></div>
+                        <div class="cart-total mt-3">
+                            <h5 class="text-end">Total: <span id="cartTotal" class="text-success fw-bold">$0.00</span></h5>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            <i class="fas fa-times me-2"></i>Cerrar
+                        </button>
+                        <button type="button" class="btn btn-success" id="checkoutBtn">
+                            <i class="fas fa-shopping-bag me-2"></i>Pagar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="loginForm" class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <input type="email" class="form-control" id="loginEmail" required>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="loginPassword" class="form-label">Contraseña</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input type="password" class="form-control" id="loginPassword" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="toggleLoginPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100 mb-3">
+                                <i class="fas fa-sign-in-alt me-2"></i>Ingresar
+                            </button>
+                            <div class="text-center">
+                                <p class="mb-0">¿No tienes una cuenta? 
+                                    <a href="#" class="text-success" id="switchToRegister">Regístrate aquí</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Register Modal -->
+        <div class="modal fade" id="registerModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="fas fa-user-plus me-2"></i>Registro</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="registerForm" class="needs-validation" novalidate>
+                            <!-- Nombre -->
+                            <div class="mb-3">
+                                <label for="regName" class="form-label">Nombre</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="regName" required>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label for="regEmail" class="form-label">Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <input type="email" class="form-control" id="regEmail" required>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+
+                            <!-- Contraseña -->
+                            <div class="mb-3">
+                                <label for="regPassword" class="form-label">Contraseña</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input type="password" class="form-control" id="regPassword" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="toggleRegPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+
+                            <!-- Confirmar Contraseña -->
+                            <div class="mb-3">
+                                <label for="regConfirmPassword" class="form-label">Confirmar Contraseña</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input type="password" class="form-control" id="regConfirmPassword" required>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-success w-100 mb-3">
+                                <i class="fas fa-user-plus me-2"></i>Registrarse
+                            </button>
+
+                            <div class="text-center">
+                                <p class="mb-0">¿Ya tienes una cuenta? 
+                                    <a href="#" class="text-success" id="switchToLogin">Inicia sesión aquí</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Spotify Player Container -->
+        <div id="spotify-player" class="spotify-player-container"></div>
+
+        <!-- Toast Container -->
+        <div class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+        
+        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+        
+        <script type="module" src="js/app.js"></script>
+        <script type="module" src="js/carousel.js"></script>
+    </body>
+<!-- Footer -->
+<footer class="footer py-4 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-start">
+                <p class="mb-0">&copy; 2024 Mandy Sweets</p>
+                <p class="mb-0">Masas Dulces y Saladas con insumos de primera calidad.</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=100048897044019" class="text-light me-3" target="_blank">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://www.instagram.com/mandy.sweets.bo/" class="text-light me-3" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/59163354871" class="text-light" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+                <div id="spotifyPlayer" class="spotify-player-container"></div>
+            </div>
+        </div>
+    </div>
+</footer>
+</html>
